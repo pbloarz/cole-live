@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('email')->default();
-            $table->string('celular');
             $table->dateTime('date_star');
             $table->dateTime('date_end');
             $table->integer('quantity_adults');
