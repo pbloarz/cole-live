@@ -25,7 +25,7 @@ return new class extends Migration
             $table->dateTime('close');
             $table->string('facebook_url');
             $table->string('whatsapp');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('users_id')->constrained();
             $table->timestamps();
         });
     }

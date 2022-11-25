@@ -27,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'photo'
     ];
 
     /**
@@ -58,4 +60,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function hotels()
+    {
+        return $this->hasMany(Hotel::class);
+    }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }
