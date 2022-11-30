@@ -1,6 +1,9 @@
 <?php
 
+use App\Actions\Jetstream\DeleteUser;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/',function(){
+    return view('welcome');
+});
 
 Route::middleware([
     'auth:sanctum',
@@ -25,4 +31,17 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::controller(UserController::class)->group(function(){
+    Route::get('/usuarios','index')->name('usuarios.index');
+    Route::get('/crear_usuarios','crear')->name('createUser');
+    Route::post('/guardarUsuario','store')->name('saveUser');
+    Route::get('/deleteUsers/{user}','destroy')->name('user.destroy');    
+    Route::get('/updateUser/{user}/edit','edit')->name('user.edit');
+    Route::put('/updateUser/{user}','update')->name('user.update');
+
+    
+    
+    
 });
