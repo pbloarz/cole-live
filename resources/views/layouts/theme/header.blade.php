@@ -19,16 +19,11 @@
 
         <ul class="navbar-item flex-row search-ul">
             <li class="nav-item align-self-center search-animated">
-                
+                <livewire:search>
             </li>
         </ul>
 
         <ul class="navbar-item flex-row navbar-dropdown">
-
-          
-
-           
-
             <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-right-from-bracket"></i>
@@ -38,10 +33,8 @@
                         <div class="media mx-auto">
                             <img src="assets/img/90x90.jpg" class="img-fluid mr-2" alt="avatar">
                             <div class="media-body">
-                               
-
-
-                            
+                                <h5>{{auth()->user()->name}}</h5>
+                                
                             </div>
                         </div>
                     </div>

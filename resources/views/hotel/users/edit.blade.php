@@ -6,7 +6,7 @@
         <div class="col-sm-12">
             <div class="widget widget-chart-one">
 
-                
+
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="input-group mb-3">
@@ -20,23 +20,32 @@
                 </div>
 
 
-                <form action="{{route('saveUser')}}" method="post">
+                <form action="{{route('user.update',$user)}}" method="POST">
                     @csrf
+                    @method('PATCH')
+
+
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">nombre</label>
                                 <input type="text" class="form-control" name="name" value="{{$user->name}}" placeholder="nombre">
                             </div>
+                            @error('name')
+                            <span class="text-danger er">{{$message}}</span>
+                            @enderror
 
                             <div class="mb-3">
                                 <label class="form-label">Correo eclectronico</label>
-                                <input type="email" class="form-control"  name="email" value="{{$user->email}}" placeholder="name@example.com">
+                                <input type="email" class="form-control" name="email" value="{{$user->email}}" placeholder="name@example.com">
                             </div>
+                            @error('email')
+                            <span class="text-danger er">{{$message}}</span>
+                            @enderror
 
                             <div class="mb-3">
                                 <label class="form-label">Contraseña</label>
-                                <input type="password" class="form-control"  name="password" value="" placeholder="*******">
+                                <input type="password" class="form-control" name="password" value="" placeholder="*******">
                             </div>
 
 
@@ -45,12 +54,12 @@
                             <div class="mb-3">
                                 <label>Tipo de usuario</label>
                                 <select name="role" class="form-control">
-                                    
                                     <option value="Admin">{{$user->role}}</option>
-                                   
-                                    
                                 </select>
                             </div>
+                            @error('role')
+                            <span class="text-danger er">{{$message}}</span>
+                            @enderror
                             <div class="mb-3">
                                 <div class="form-group custom-file">
                                     <input type="file" class="custom-file-input form-control" name="image" accept="image/x-png, image/git, image/jpeg">
@@ -58,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-dark">Guardar</button>
+                                <button type="submit" class="btn btn-dark">Actualizar datos</button>
                                 <a href="{{route('usuarios.index')}}" type="button" class="btn btn-danger">Cancelar</a>
                             </div>
 

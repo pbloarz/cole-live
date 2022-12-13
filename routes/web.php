@@ -2,6 +2,8 @@
 
 use App\Actions\Jetstream\DeleteUser;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Role;
+use App\Http\Livewire\RoleUsers;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
@@ -19,7 +21,7 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/',function(){
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -33,15 +35,14 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::controller(UserController::class)->group(function(){
-    Route::get('/usuarios','index')->name('usuarios.index');
-    Route::get('/crear_usuarios','crear')->name('createUser');
-    Route::post('/guardarUsuario','store')->name('saveUser');
-    Route::get('/deleteUsers/{user}','destroy')->name('user.destroy');    
-    Route::get('/updateUser/{user}/edit','edit')->name('user.edit');
-    Route::put('/updateUser/{user}','update')->name('user.update');
-
-    
-    
-    
+Route::middleware('auth')->controller(UserController::class)->group(function () {
+    Route::get('/usuarios', 'index')->name('usuarios.index');
+    Route::get('/crear_usuarios', 'crear')->name('createUser');
+    Route::post('/guardarUsuario', 'store')->name('saveUser');
+    Route::get('/deleteUsers/{user}', 'destroy')->name('user.destroy');
+    Route::patch('/updateUser/{user}', 'update')->name('user.update');
+    Route::get('/updateUser/{user}/edit', 'edit')->name('user.edit');
 });
+
+
+    Route::get('admin-users',RoleUsers::class)->name('admiUsers.index');

@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class UserUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +25,9 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  =>[ 'required','min:5'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'  => ['required','min:8'],
-            'role'  => ['required','not_in:Elegir']
+            'name'  => ['required','min:8','string'],
+            'email' => "required|unique:users,email,{$this->selected_id}",
+            'role'  => 'required|not_in:Elegir'
         ];
     }
 
@@ -39,8 +39,6 @@ class UserRequest extends FormRequest
             'email.required' => 'Email requerido',
             'email.unique' => 'Este email ya existe',
             'email.email' => 'No es un email',
-            'password.required' => 'Contraseña requerida',
-            'password.min' => 'la contraseña debe tener como mínimo 8 caracteres',
             'role.required' => 'Rol requerido',
             'role.not_in' => 'Rol debe ser diferente de Eligir',
 
