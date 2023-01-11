@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-            $table->enum('payments',['transaction','cash'])->default('transaction');
+        Schema::create('reservations', function (Blueprint $table) {
+           $table->id();
+            $table->unsignedBigInteger('users_id');
+            $table->foreign('users_id')->references('id')->on('users');
+
+            $table->unsignedBigInteger('books_id');
+            $table->foreign('books_id')->references('id')->on('books');
+            $table->date('days');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('reservations');
     }
 };

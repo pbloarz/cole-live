@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -61,16 +63,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function hotels()
+    public function reserv()
     {
-        return $this->hasMany(Hotel::class);
+        return $this->hasMany(reservatio::class);
     }
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class);
-    }
-    public function rooms()
-    {
-        return $this->hasMany(Room::class);
-    }
+    
+
+
 }
